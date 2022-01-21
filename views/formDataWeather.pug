@@ -1,0 +1,19 @@
+extends layouts/style.pug
+
+block content 
+  .row.mt-3
+  .col-sm-4.mx-auto
+    h3.text-xs-center Specify the data 
+    form(action='/getWeather' method='post')
+      .row.form-group
+        .col-sm
+          input.form-control(name='city' placeholder='City (in English)')
+          if errors.city
+            .text-warning= errors.city 
+      .row.form-group
+        .col-sm
+          input.form-control(name='date' placeholder='Date, for example, 2022-01-23')
+          if errors.date 
+            .text-warning= errors.date
+      .form-group
+        button.btn.btn-success.btn-block(type='submit' style='background-color:#C0C0C0;') Send 
