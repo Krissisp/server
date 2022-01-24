@@ -1,15 +1,15 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet' href='/assets/bootstrap/dist/css/bootstrap.css')
+  title= title
+  link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
   body
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light
-      a.navbar-brand(href="/") Weather
-        ul.navbar-nav.ml-auto
-          li.nav-item
-            a.nav-link(href="/user/new") Sign in
-          li.nav-item
-            a.nav-link(href="/user/terminal/aut") Sign up
-    .container
+    .container-fluid
+      .row 
+        .col-sm-8
+        .col-sm-2
+          a.button.btn.btn-success.btn-block(href="/user/new" style='background-color:#006666;') Sign in 
+        .col-sm-2
+          a.button.btn.btn-success.btn-block(href="/user/terminal/aut" style='background-color:#006666;') Sign up 
+  h1 Hello!
       block content
