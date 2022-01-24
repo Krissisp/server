@@ -14,8 +14,7 @@ class WeatherController {
         try {
             const errorsWeatherData = validationResult(req); 
             if (!errorsWeatherData.isEmpty()) {
-                errorsWeatherData.errors.forEach(err => 
-                    errors[err.param] = err.msg);
+                errorsWeatherData.errors.forEach(err => errors[err.param] = err.msg);
                 res.status(402);
                 res.render('formDataWeather', { form: {}, errors: errors});
                 return;

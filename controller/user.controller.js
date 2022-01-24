@@ -1,5 +1,6 @@
 const db = require('../db');
 const { validationResult } = require('express-validator'); 
+const { crypto } = require('../SHA256.js');
 
 
 class UserController {
@@ -9,6 +10,7 @@ class UserController {
     }
 
     createUser = async function createUser(req, res) {
+        const {password, nickname} = req.body;
         let errors = {};
         const errorsRegistration = validationResult(req); 
         if (!errorsRegistration.isEmpty()) {
@@ -18,7 +20,8 @@ class UserController {
             res.render('new', { form: {}, errors: errors });
             return;
         } else {
-            await db.query(`INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *`, [nickname, password]);
+            const hashPassword = await crypto(password);
+            await db.query(`INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *`, [nickname, hashPassword]);
             res.redirect('/')
         }
     }
@@ -31,8 +34,7 @@ class UserController {
         let errors = {};
         const errorsAut = validationResult(req); 
         if (!errorsAut.isEmpty()) {
-            errorsAut.errors.forEach(err => 
-                errors[err.param] = err.msg);
+            errorsAut.errors.forEach(err => errors[err.param] = err.msg);
             res.status(402);
             res.render('aut', { form: {}, errors: errors });
             return;

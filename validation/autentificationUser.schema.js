@@ -1,4 +1,5 @@
 const db = require('../db');
+const Crypto = require('crypto-js');
 
 const autentificationUserSchema = {
     nickname: {
@@ -15,8 +16,8 @@ const autentificationUserSchema = {
     password: { 
         custom : {
             options: async function(password) {
-                const users = await db.query('SELECT password FROM users');
-                const passwordDB = users.rows.filter((user) => user.password === password);
+                const hashPasswordusers = await db.query('SELECT password FROM users');
+                const passwordDB = hashPasswordusers.rows.filter((user) => Crypto.AES.decrypt(user.password, 'khbfmls,nbcjkdgl').toString(Crypto.enc.Utf8) === password);
                 if(passwordDB.length === 0) {
                     throw ("Invalid password");
                 }
