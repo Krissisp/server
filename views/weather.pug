@@ -1,3 +1,50 @@
-extends formDataWeather.pug
-
-block content 
+doctype html
+head
+    title= title 
+    meta(name='viewport' content='width=device-width, initial-scale=1')
+    link(rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    body
+        .container-fluid
+        .row
+            .col-sm-10 
+            .col-sm-2
+                a.button.btn.btn-success.btn-block(href="/user/out" style='background-color:#006666;') Sign out
+        .row
+            .col-sm-2
+            .col-sm-8
+                h3.text-xs-center Weather in #{city} at #{date}
+        .row
+            .col-sm-1 
+            .col-sm-1 Time 
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.time}
+        .row
+            .col-sm-1 
+            .col-sm-1 Temperature 
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.temperature}
+        .row
+            .col-sm-1 
+            .col-sm-1 Feels like
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.feels_like}
+        .row
+            .col-sm-1 
+            .col-sm-1 Humidity
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.humidity}
+        .row
+            .col-sm-1 
+            .col-sm-1 Clouds
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.clouds}
+        .row
+            .col-sm-1 
+            .col-sm-1 Speed wind
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.speed_wind}
+        .row
+            .col-sm-1 
+            .col-sm-1 Description
+            each value of weatherAtDate.rows
+                .col-sm-1 #{value.description}

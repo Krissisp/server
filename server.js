@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const routUsers = require('./routs/users.routs.js');
-const routeWeather = require('./routs/weather.routs.js');
+const routeUsers = require('./routes/users.routes.js');
+const routeWeather = require('./routes/weather.routes.js');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 
@@ -24,7 +24,7 @@ app.get('/', async (req, res) => {
     }
 })
 
-app.use('/', routUsers);
+app.use('/', routeUsers);
 app.use('/', routeWeather);
 
 app.listen(process.env.PORT || 80, () => {

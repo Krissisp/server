@@ -19,16 +19,18 @@ class WeatherController {
                 res.render('formDataWeather', { form: {}, errors: errors});
                 return;
             }
-        await getWeather(city);
-        const weatherAtDate = await db.query(`SELECT * FROM weatherInCity WHERE datestr = '${date}' AND city = '${city}' ORDER BY time`);
-        res.render('weather');
+            await getWeather(city);
+            const weatherAtDate = await db.query(`SELECT * FROM weatherInCity WHERE datestr = '${date}' AND city = '${city}' ORDER BY time`);
+            console.log(weatherAtDate.rows)
+            res.render('weather', {weatherAtDate, city, date});
 
-    } catch(e) {
-        errors.city = 'Incorrect city name or the city was not found';
-        res.status(402);
-        res.render('formDataWeather', { form: {}, errors: errors});
-      }
-    }
+        } catch(e) {
+            console.log(e)
+            errors.city = 'Incorrect city name or the city was not found';
+            res.status(402);
+            res.render('formDataWeather', { form: {}, errors: errors});
+          }
+        }
 };
 
 module.exports = new WeatherController();

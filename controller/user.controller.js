@@ -1,6 +1,6 @@
 const db = require('../db');
 const { validationResult } = require('express-validator'); 
-const { crypto } = require('../SHA256.js');
+const { crypto } = require('../hashPassword.js');
 
 
 class UserController {
